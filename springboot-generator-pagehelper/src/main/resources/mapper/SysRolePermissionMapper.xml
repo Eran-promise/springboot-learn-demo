@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.web.springboot.dao.SysRolePermissionMapper" >
+  <resultMap id="BaseResultMap" type="com.web.springboot.entity.SysRolePermission" >
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="sys_role_id" property="sysRoleId" jdbcType="INTEGER" />
+    <result column="sys_permission_id" property="sysPermissionId" jdbcType="INTEGER" />
+  </resultMap>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from sys_role_permission
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.web.springboot.entity.SysRolePermission" >
+    <selectKey resultType="java.lang.Integer" keyProperty="id" order="BEFORE" >
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into sys_role_permission (id, sys_role_id, sys_permission_id
+      )
+    values (#{id,jdbcType=INTEGER}, #{sysRoleId,jdbcType=INTEGER}, #{sysPermissionId,jdbcType=INTEGER}
+      )
+  </insert>
+  <update id="updateByPrimaryKey" parameterType="com.web.springboot.entity.SysRolePermission" >
+    update sys_role_permission
+    set sys_role_id = #{sysRoleId,jdbcType=INTEGER},
+      sys_permission_id = #{sysPermissionId,jdbcType=INTEGER}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select id, sys_role_id, sys_permission_id
+    from sys_role_permission
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <select id="selectAll" resultMap="BaseResultMap" >
+    select id, sys_role_id, sys_permission_id
+    from sys_role_permission
+  </select>
+</mapper>
