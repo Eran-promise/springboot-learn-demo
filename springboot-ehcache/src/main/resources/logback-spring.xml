@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration>    
+    <!--定义一个将日志输出到控制台的appender，名称为STDOUT -->
+    <appender name="STDOUT" class="ch.qos.logback.core.ConsoleAppender">
+        <encoder>
+	        <pattern>[%contextName]%date [%thread %line] %level >> %msg >> %logger{10}%n</pattern>
+	    </encoder>
+    </appender> 
+    
+     <!-- 指定com.web.springbootehcache包下的日志打印级别为DEBUG，但是由于没有引用appender，所以该logger不会打印日志信息，日志信息向上传递 -->
+    <logger name="com.web.springbootehcache" level="DEBUG"></logger>
+    <!-- 这里的logger根据需要自己灵活配置 ，我这里只是给出一个demo-->
+ 
+    <root level="INFO">
+        <appender-ref ref="STDOUT" />
+    </root>
+</configuration>
